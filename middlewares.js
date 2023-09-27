@@ -101,7 +101,7 @@ app.get('/',[middleFunction,middleFunction2],(req,res)=>{
 
 //! Middlewares & USE:
 
-/* ------------------------------------------------------- */
+/* ------------------------------------------------------- *
 
 
 const middleFunction1 = (req, res, next) => {
@@ -167,6 +167,25 @@ app.get('/', (req, res) => {
     })
 })
 /* ------------------------------------------------------- */
+
+//? index.js sayfasındaki fonksiyonları export edip çağırma
+const [middleFunction2,middleFunction3] = require('./middlewares/index')
+
+//? import edilen fonksiyonları app.use ile çalıştırma
+// app.use(middleFunction2,middleFunction3)
+
+//? export edilen fonksiyonlar bir değişkenin içine atılıp çağırılabilir
+const fonks = require('./middlewares/index')
+
+app.use(fonks)
+
+
+app.get('/', (req, res) => {
+    res.send({
+        message: 'welcome to home'
+    })
+})
+
 
 app.listen(PORT, () => console.log("Running: http://127.0.0.1:" + PORT));
 
